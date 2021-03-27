@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
+    public Transform CenterHand;
+
     private IState curState;
     private Dictionary<Type, IState> behaviors = new Dictionary<Type, IState>();
 
@@ -15,7 +17,7 @@ public class Player : MonoBehaviour
         Animator animator = GetComponent<Animator>();
         behaviors[typeof(StateMovement)] = new StateMovement(animator, 
             GetComponent<NavMeshAgent>());
-        behaviors[typeof(StateShoot)] = new StateShoot(animator);
+        behaviors[typeof(StateShoot)] = new StateShoot(animator, CenterHand);
 
         SetState<StateMovement>();
     }
