@@ -1,42 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
-    public LayerMask layerMask;
-    public float maxRemainingDistanceForIdle = 1;
+    private IState curState;
+    private Dictionary<Type, IState> behaviors = new Dictionary<Type, IState>();
 
 
-    private Animator animator;
-    private float maxDistandceOfRay = 100;
-    private NavMeshAgent myAgent;
-    private RaycastHit hitInfo = new RaycastHit();
-
-    private bool isRun;
-    // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
-        isRun = false;
-        myAgent = GetComponent<NavMeshAgent>();
+        Animator animator = GetComponent<Animator>();
+        behaviors[typeof(StateMovement)] = new StateMovement(animator, 
+            GetComponent<NavMeshAgent>());
+        behaviors[typeof(StateShoot)] = new StateShoot(animator);
+
+        SetState<StateMovement>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hitInfo, maxDistandceOfRay, layerMask))
-                myAgent.SetDestination(hitInfo.point);
-        } 
+        curState.GraphicAction();
     }
 
     private void FixedUpdate()
     {
-        isRun = myAgent.remainingDistance > maxRemainingDistanceForIdle;
-        animator.SetBool("isRun", isRun);
+        curState.PhysicAction();
+    }
+
+    public void SetState<T>() where T : IState
+    {
+        IState newState = GetState<T>();
+        if (curState != null) curState.Exit();
+        curState = newState;
+        curState.Enter();
+    }
+
+    public IState GetState<T>() where T : IState
+    {
+        return behaviors[typeof(T)];
     }
 }
