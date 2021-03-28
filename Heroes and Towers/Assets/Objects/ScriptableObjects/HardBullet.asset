@@ -16,3 +16,6 @@ MonoBehaviour:
   LifeTime: 7
   DefaultDamage: 105
   ImpulseCollision: 20
+  ParticleStartShot: {fileID: 1025656936520744834, guid: ff1223be026b13b4883fa0719db3c131, type: 3}
+  ParticleTrail: {fileID: 6589675477410199200, guid: 2911f04b32dd97b4aa520ff33b907ea3, type: 3}
+  ParticleEndShot: {fileID: 4146417572500098004, guid: 3385c355cd0e12344a2e6920d72d3ac4, type: 3}
