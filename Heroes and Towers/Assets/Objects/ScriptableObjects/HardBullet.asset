@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0dcf72093010bb479a01f242d2b63fd, type: 3}
   m_Name: HardBullet
   m_EditorClassIdentifier: 
-  Speed: 1
+  Speed: 10
   LifeTime: 7
-  DefaultDamage: 25
-  ImpulseCollision: 10
+  DefaultDamage: 105
+  ImpulseCollision: 20
