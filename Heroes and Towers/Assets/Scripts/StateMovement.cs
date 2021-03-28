@@ -9,7 +9,7 @@ public class StateMovement : IState
     private Animator animator;
     private float maxDistandceOfRay = 100;
     private NavMeshAgent myAgent;
-    private RaycastHit hitInfo = new RaycastHit();
+    private RaycastHit hitInfo;
 
     // Start is called before the first frame update
     public StateMovement(Animator animator, NavMeshAgent navMeshAgent)

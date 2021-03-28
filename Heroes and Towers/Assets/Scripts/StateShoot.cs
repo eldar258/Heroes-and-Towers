@@ -3,11 +3,13 @@ using UnityEditor;
 
 public class StateShoot : IState
 {
-    public BulletSpawner BulletSpawner;
-
     private Animator animator;
     private Transform startShot;
     private float maxDistace = 100;
+    private float timeLastShot = 0;
+    private bool isRedyToShot = false;
+    private RaycastHit hitInfo;
+
     public StateShoot(Animator animator, Transform startShot)
     {
         this.animator = animator;
@@ -25,21 +27,24 @@ public class StateShoot : IState
 
     public void GraphicAction()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
             animator.SetTrigger("isShot");
-            RaycastHit hitInfo;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hitInfo, maxDistace))
-            {
-                createShot(hitInfo.point);
-            }
+            isRedyToShot = Physics.Raycast(ray, out hitInfo, maxDistace);
         }
     }
 
     public void PhysicAction()
     {
-        //TODO
+        if (isRedyToShot && 
+            Time.fixedTime - timeLastShot > 
+            HeroManager.instance.CurrentGunSetting.SecondForShot)
+        {
+            createShot(hitInfo.point);
+            timeLastShot = Time.fixedTime;
+            isRedyToShot = false;
+        }
     }
 
     private void createShot(Vector3 point)
