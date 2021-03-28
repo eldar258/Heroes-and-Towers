@@ -29,4 +29,13 @@ public class Bullet : MonoBehaviour
     {
         gameObject.SetActive(isActive);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Enemy enemy = collision.gameObject.GetComponentInParent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.EnemyDeath();
+        }
+    }
 }
