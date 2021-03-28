@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+/// <summary>
+/// Логика врага
+/// </summary>
 public class Enemy : MonoBehaviour
 {
+    /// <summary>
+    /// Количество жизней у врага
+    /// </summary>
     public float Health {
         get { return health; }
         set {if (!isEnemyDeath) health = value;}
@@ -31,7 +36,9 @@ public class Enemy : MonoBehaviour
         agent.SetDestination(heroPosition.position);
         if (Health <= 0) EnemyDeath();
     }
-
+    /// <summary>
+    /// Убивает врага
+    /// </summary>
     public void EnemyDeath()
     {
         if (!isEnemyDeath)

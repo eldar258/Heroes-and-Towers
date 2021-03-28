@@ -3,9 +3,14 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.AI;
-
+/// <summary>
+/// Описывает логику игрока
+/// </summary>
 public class Player : MonoBehaviour
 {
+    /// <summary>
+    /// Расположение центра руки
+    /// </summary>
     public Transform CenterHand;
 
     private IState curState;
@@ -30,7 +35,10 @@ public class Player : MonoBehaviour
     {
         curState.PhysicAction();
     }
-
+    /// <summary>
+    /// Смена состояния
+    /// </summary>
+    /// <typeparam name="T">Тип состояния, на которое нужно поменять</typeparam>
     public void SetState<T>() where T : IState
     {
         IState newState = GetState<T>();
@@ -38,7 +46,11 @@ public class Player : MonoBehaviour
         curState = newState;
         curState.Enter();
     }
-
+    /// <summary>
+    /// Получение из типа состояния объект состояния
+    /// </summary>
+    /// <typeparam name="T">Тип состояния, которое нужно получить</typeparam>
+    /// <returns>Объект состояния соответсвующего типа</returns>
     public IState GetState<T>() where T : IState
     {
         return behaviors[typeof(T)];

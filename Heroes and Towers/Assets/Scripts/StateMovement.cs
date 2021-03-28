@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-
+/// <summary>
+/// Логика состояния передвежения у игрока
+/// </summary>
 public class StateMovement : IState
 {
+    /// <summary>
+    /// Маска, по которой может ходить игрок
+    /// </summary>
     public LayerMask layerMask;
 
     private float maxRemainingDistanceForIdle = 0.3f;
@@ -11,7 +16,6 @@ public class StateMovement : IState
     private NavMeshAgent myAgent;
     private RaycastHit hitInfo;
 
-    // Start is called before the first frame update
     public StateMovement()
     {
         Player player = HeroManager.instance.Player;
@@ -19,7 +23,7 @@ public class StateMovement : IState
         myAgent = player.GetComponent<NavMeshAgent>();
         layerMask.value = LayerMask.GetMask("Ground");
     }
-
+   
     public void Enter()
     {
         idle();
@@ -30,7 +34,6 @@ public class StateMovement : IState
         idle();
     }
 
-    // Update is called once per frame
     public void GraphicAction()
     {
         if (Input.GetMouseButtonDown(0))

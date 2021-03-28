@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEditor;
-
+/// <summary>
+/// Логика состояния стрельбы
+/// </summary>
 public class StateShoot : IState
 {
     private Animator animator;

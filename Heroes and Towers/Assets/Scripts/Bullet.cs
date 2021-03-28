@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Логика пули
+/// </summary>
 public class Bullet : MonoBehaviour
 {
+    /// <summary>
+    /// Настройки для пули
+    /// </summary>
     public BulletObjects Settings;
 
     private Rigidbody rb;
@@ -17,7 +22,11 @@ public class Bullet : MonoBehaviour
     {
         rb.AddForce(transform.forward * Settings.Speed);
     }
-
+    /// <summary>
+    /// Пуля летит из startPos в endPos
+    /// </summary>
+    /// <param name="startPos">Место появления</param>
+    /// <param name="endPos">Направление</param>
     public void startShot(Vector3 startPos, Vector3 endPos)
     {
         transform.position = startPos;
@@ -29,7 +38,10 @@ public class Bullet : MonoBehaviour
         
         Instantiate(Settings.ParticleTrail, transform.position, transform.rotation, transform);
     }
-
+    /// <summary>
+    /// Активация или деактивация объекта
+    /// </summary>
+    /// <param name="isActive"></param>
     public void SetActive(bool isActive)
     {
         gameObject.SetActive(isActive);
