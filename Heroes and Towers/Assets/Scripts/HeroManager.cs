@@ -12,7 +12,7 @@ public class HeroManager : MonoBehaviour
 
     private Dictionary<string, GunObjects> guns = new Dictionary<string, GunObjects>();
 
-    void Start()
+    void Awake()
     {
         if (instance == null)
         {

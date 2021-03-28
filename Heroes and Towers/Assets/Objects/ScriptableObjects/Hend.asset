@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 3fb5efbb7383c8049bb35ad56e9491de, type: 3}
   m_Name: Hend
   m_EditorClassIdentifier: Assembly-CSharp::GunObject
+  Name: Hend
   SecondForShot: 0.6
