@@ -5,8 +5,12 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public float Health = 100;
+    public float Health {
+        get { return health; }
+        set {if (!isEnemyDeath) health = value;}
+    }
 
+    private float health = 100;
     private Transform heroPosition;
     private NavMeshAgent agent;
     private Animator animator;
@@ -25,7 +29,7 @@ public class Enemy : MonoBehaviour
     {
         if (isEnemyDeath) return;
         agent.SetDestination(heroPosition.position);
-        isEnemyDeath = Health <= 0;
+        if (Health <= 0) EnemyDeath();
     }
 
     public void EnemyDeath()
