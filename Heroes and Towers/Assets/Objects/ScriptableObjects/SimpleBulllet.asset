@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   LifeTime: 7
+  DefaultDamage: 25
+  ImpulseCollision: 3

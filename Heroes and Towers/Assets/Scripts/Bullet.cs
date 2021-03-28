@@ -35,8 +35,8 @@ public class Bullet : MonoBehaviour
         Enemy enemy = collision.gameObject.GetComponentInParent<Enemy>();
         if (enemy != null)
         {
-            //enemy.EnemyDeath();
             enemy.Health -= Settings.DefaultDamage;
+            collision.rigidbody.AddForce(transform.forward * Settings.ImpulseCollision, ForceMode.Impulse);
         }
     }
 }

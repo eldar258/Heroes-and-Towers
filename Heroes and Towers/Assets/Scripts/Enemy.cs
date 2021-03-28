@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
         get { return health; }
         set {if (!isEnemyDeath) health = value;}
     }
-
+    [SerializeField]
     private float health = 100;
     private Transform heroPosition;
     private NavMeshAgent agent;
