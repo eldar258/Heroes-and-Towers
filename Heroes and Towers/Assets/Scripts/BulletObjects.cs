@@ -9,4 +9,7 @@ public class BulletObjects : ScriptableObject
     public float LifeTime = 7;
     public float DefaultDamage = 25;
     public float ImpulseCollision = 10;
+    public GameObject ParticleStartShot;
+    public GameObject ParticleTrail;
+    public GameObject ParticleEndShot;
 }

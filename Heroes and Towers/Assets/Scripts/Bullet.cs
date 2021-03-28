@@ -23,6 +23,11 @@ public class Bullet : MonoBehaviour
         transform.position = startPos;
         transform.LookAt(endPos);
         Destroy(gameObject, Settings.LifeTime); //TODO need GetBack in pool!
+
+        Destroy(Instantiate(Settings.ParticleStartShot, transform.position, transform.rotation)
+            , Settings.LifeTime);
+        
+        Instantiate(Settings.ParticleTrail, transform.position, transform.rotation, transform);
     }
 
     public void SetActive(bool isActive)
@@ -37,6 +42,7 @@ public class Bullet : MonoBehaviour
         {
             enemy.Health -= Settings.DefaultDamage;
             collision.rigidbody.AddForce(transform.forward * Settings.ImpulseCollision, ForceMode.Impulse);
+            Instantiate(Settings.ParticleEndShot, transform.position, transform.rotation, transform);
         }
     }
 }
