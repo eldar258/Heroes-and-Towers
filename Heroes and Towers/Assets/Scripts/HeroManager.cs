@@ -5,6 +5,7 @@ using UnityEngine;
 public class HeroManager : MonoBehaviour
 {
     public static HeroManager instance = null;
+    public Player Player;
     public List<GunObjects> GunSettings;
     public GunObjects CurrentGunSetting;
 

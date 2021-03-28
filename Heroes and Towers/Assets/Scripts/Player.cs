@@ -15,9 +15,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         Animator animator = GetComponent<Animator>();
-        behaviors[typeof(StateMovement)] = new StateMovement(animator, 
-            GetComponent<NavMeshAgent>());
-        behaviors[typeof(StateShoot)] = new StateShoot(animator, CenterHand);
+        behaviors[typeof(StateMovement)] = new StateMovement();
+        behaviors[typeof(StateShoot)] = new StateShoot();
 
         SetState<StateMovement>();
     }

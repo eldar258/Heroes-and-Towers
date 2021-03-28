@@ -12,10 +12,11 @@ public class StateMovement : IState
     private RaycastHit hitInfo;
 
     // Start is called before the first frame update
-    public StateMovement(Animator animator, NavMeshAgent navMeshAgent)
+    public StateMovement()
     {
-        this.animator = animator;
-        myAgent = navMeshAgent;
+        Player player = HeroManager.instance.Player;
+        this.animator = player.GetComponent<Animator>();
+        myAgent = player.GetComponent<NavMeshAgent>();
         layerMask.value = LayerMask.GetMask("Ground");
     }
 

@@ -9,11 +9,14 @@ public class StateShoot : IState
     private float timeLastShot = 0;
     private bool isRedyToShot = false;
     private RaycastHit hitInfo;
+    private Transform playerTransform;
 
-    public StateShoot(Animator animator, Transform startShot)
+    public StateShoot()
     {
-        this.animator = animator;
-        this.startShot = startShot;
+        Player player = HeroManager.instance.Player;
+        this.animator = player.GetComponent<Animator>();
+        this.startShot = player.CenterHand;
+        this.playerTransform = player.GetComponent<Transform>();
     }
     public void Enter()
     {
@@ -37,18 +40,31 @@ public class StateShoot : IState
 
     public void PhysicAction()
     {
-        if (isRedyToShot && 
-            Time.fixedTime - timeLastShot > 
-            HeroManager.instance.CurrentGunSetting.SecondForShot)
+        if (isRedyToShot)
         {
-            createShot(hitInfo.point);
-            timeLastShot = Time.fixedTime;
-            isRedyToShot = false;
+            rotateHeroToShot();
+            if (isPossibleShoot())
+            {
+                createShot(hitInfo.point);
+                timeLastShot = Time.fixedTime;
+                isRedyToShot = false;
+            }
         }
     }
 
     private void createShot(Vector3 point)
     {
         BulletSpawner.instance.createBullet(startShot.position, point);
+    }
+
+    private void rotateHeroToShot()
+    {
+        playerTransform.rotation = Quaternion.LookRotation(hitInfo.point - playerTransform.position);
+        playerTransform.Rotate(0, 90, 0);
+    }
+
+    private bool isPossibleShoot()
+    {
+        return Time.fixedTime - timeLastShot > HeroManager.instance.CurrentGunSetting.SecondForShot;
     }
 }
